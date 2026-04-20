@@ -222,7 +222,7 @@ pub fn toml_config(_attr: TokenStream, item: TokenStream) -> TokenStream {
 fn load_crate_cfg(path: &Path) -> Option<Defn> {
     let contents = std::fs::read_to_string(&path).ok()?;
     let parsed = toml::from_str::<Config>(&contents).ok()?;
-    let name = env::var("CARGO_PKG_NAME").ok()?;
+    let name = env!("CARGO_PKG_NAME");
     parsed.crates.get(&name).cloned()
 }
 
